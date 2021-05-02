@@ -12,7 +12,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DepartmentServiceTest {
+class DepartmentDAOTest {
 
     @Test
     public void saveTest(){
@@ -21,15 +21,15 @@ class DepartmentServiceTest {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         //-----------------------------------------------------------------------------------------
         // Create repository
-        DepartmentService departmentService = new DepartmentService(entityManager);
+        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
         // Create two department and add 2 courses to their list of courses
         Department department1 = new Department("Department 1");
         department1.addCourse(new Course("Course 1", "Maths"));
         department1.addCourse(new Course("Course 2", "Physics"));
         Department department2 = new Department("Department 2");
         department2.addCourse(new Course("Course 3", "Electronics"));
-        Optional<Department> savedDepartment1 = departmentService.save(department1);
-        Optional<Department> savedDepartment2 = departmentService.save(department2);
+        Optional<Department> savedDepartment1 = departmentDAO.save(department1);
+        Optional<Department> savedDepartment2 = departmentDAO.save(department2);
         assertEquals("Department(id=1, name=Department 1, " +
                         "courses=[Course(id=2, name=Course 1, description=Maths, department=Department 1), " +
                         "Course(id=3, name=Course 2, description=Physics, department=Department 1)])"
@@ -45,17 +45,17 @@ class DepartmentServiceTest {
          EntityManager entityManager = entityManagerFactory.createEntityManager();
          //-----------------------------------------------------------------------------------------
          // Create repository
-         DepartmentService departmentService = new DepartmentService(entityManager);
+         DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
          // Create two department and add 2 courses to their list of courses
          Department department1 = new Department("Department 1");
          department1.addCourse(new Course("Course 1", "Maths"));
          department1.addCourse(new Course("Course 2", "Physics"));
          Department department2 = new Department("Department 2");
          department2.addCourse(new Course("Course 3", "Electronics"));
-         departmentService.save(department1);
-         departmentService.save(department2);
+         departmentDAO.save(department1);
+         departmentDAO.save(department2);
          // Find all departments
-         List<Department> departments = departmentService.findAll();
+         List<Department> departments = departmentDAO.findAll();
          assertEquals("[Department(id=1, name=Department 1, courses=[Course(id=2, name=Course 1, description=Maths, department=Department 1), Course(id=3, name=Course 2, description=Physics, department=Department 1)])" +
                          ", Department(id=4, name=Department 2, courses=[Course(id=5, name=Course 3, description=Electronics, department=Department 2)])]",
                  departments.toString());
@@ -69,16 +69,16 @@ class DepartmentServiceTest {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         //-----------------------------------------------------------------------------------------
         // Create repository
-        DepartmentService departmentService = new DepartmentService(entityManager);
+        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
         // Create two department and add 2 courses to their list of courses
         Department department1 = new Department("Department 1");
         department1.addCourse(new Course("Course 1", "Maths"));
         department1.addCourse(new Course("Course 2", "Physics"));
         Department department2 = new Department("Department 2");
         department2.addCourse(new Course("Course 3", "Electronics"));
-        departmentService.save(department1);
-        departmentService.save(department2);
-        Optional<Department> departmentByName = departmentService.findByName("Department 1");
+        departmentDAO.save(department1);
+        departmentDAO.save(department2);
+        Optional<Department> departmentByName = departmentDAO.findByName("Department 1");
         assertEquals("Department(id=1, name=Department 1, " +
                         "courses=[Course(id=2, name=Course 1, description=Maths, department=Department 1), " +
                         "Course(id=3, name=Course 2, description=Physics, department=Department 1)])"
@@ -93,19 +93,19 @@ class DepartmentServiceTest {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         //-----------------------------------------------------------------------------------------
         // Create repository
-        DepartmentService departmentService = new DepartmentService(entityManager);
+        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
         // Create two department and add 2 courses to their list of courses
         Department department1 = new Department("Department 1");
         department1.addCourse(new Course("Course 1", "Maths"));
         department1.addCourse(new Course("Course 2", "Physics"));
         Department department2 = new Department("Department 2");
         department2.addCourse(new Course("Course 3", "Electronics"));
-        departmentService.save(department1);
-        departmentService.save(department2);
+        departmentDAO.save(department1);
+        departmentDAO.save(department2);
         assertEquals("Department(id=1, name=Department 1, " +
                         "courses=[Course(id=2, name=Course 1, description=Maths, department=Department 1), " +
                         "Course(id=3, name=Course 2, description=Physics, department=Department 1)])"
-                ,departmentService.findById(1).get().toString());
+                , departmentDAO.findById(1).get().toString());
     }
 
 }

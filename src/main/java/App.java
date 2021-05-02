@@ -1,7 +1,7 @@
 import Entities.Course;
 import Entities.Department;
-import Service.CourseService;
-import Service.DepartmentService;
+import Service.CourseDAO;
+import Service.DepartmentDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,8 +16,8 @@ public class App {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         //-----------------------------------------------------------------------------------------
         // Create our repositories
-        CourseService courseService = new CourseService(entityManager);
-        DepartmentService departmentService = new DepartmentService(entityManager);
+        CourseDAO courseDAO = new CourseDAO(entityManager);
+        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
         //-----------------------------------------------------------------------------------------
 
         // Create an department and add 3 courses to his list of courses
@@ -25,41 +25,41 @@ public class App {
         department1.addCourse(new Course("Course 1","Maths"));
         department1.addCourse(new Course("Course 2","Physics"));
         department1.addCourse(new Course("Course 3","Electronics"));
-        Optional<Department> savedDepartment = departmentService.save(department1);
+        Optional<Department> savedDepartment = departmentDAO.save(department1);
         System.out.println("Saved department: " + savedDepartment.get());
 
         // Find all departments
-        List<Department> departments = departmentService.findAll();
+        List<Department> departments = departmentDAO.findAll();
         System.out.println("Departments:");
         departments.forEach(System.out::println);
         // Find department by name
-        Optional<Department> departmentByName = departmentService.findByName("Department 1");
+        Optional<Department> departmentByName = departmentDAO.findByName("Department 1");
         System.out.println("Searching for an department by name: ");
         departmentByName.ifPresent(System.out::println);
         //-----------------------------------------------------------------------------------------
         // Search for a course by ID
-        Optional<Course> foundCourse = courseService.findById(2);
+        Optional<Course> foundCourse = courseDAO.findById(2);
         foundCourse.ifPresent(System.out::println);
         // Search for a course with an invalid ID
-        Optional<Course> notFoundCourse = courseService.findById(99);
+        Optional<Course> notFoundCourse = courseDAO.findById(99);
         notFoundCourse.ifPresent(System.out::println);
         // List all courses
-        List<Course> courses = courseService.findAll();
+        List<Course> courses = courseDAO.findAll();
         System.out.println("Courses in database:");
         courses.forEach(System.out::println);
         // Find a course by name
-        Optional<Course> queryCourse1 = courseService.findByName("Course 2");
+        Optional<Course> queryCourse1 = courseDAO.findByName("Course 2");
         System.out.println("Query for course 2:");
         queryCourse1.ifPresent(System.out::println);
         // Find a course by name using a named query
-        Optional<Course> queryCourse2 = courseService.findByNameNamedQuery("Course 3");
+        Optional<Course> queryCourse2 = courseDAO.findByNameNamedQuery("Course 3");
         System.out.println("Query for course 3:");
         queryCourse2.ifPresent(System.out::println);
         // Add a course to department 1
-        Optional<Department> department2 = departmentService.findById(1);
+        Optional<Department> department2 = departmentDAO.findById(1);
         department2.ifPresent(a -> {
             a.addCourse(new Course("Course 4","Circuit Design"));
-            System.out.println("Saved author: " + departmentService.save(a));
+            System.out.println("Saved author: " + departmentDAO.save(a));
         });
         // Close the entity manager and associated factory
         //-----------------------------------------------------------------------------------------

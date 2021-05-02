@@ -6,9 +6,9 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class DepartmentService {
+public class DepartmentDAO {
     private EntityManager entityManager;
-    public DepartmentService(EntityManager entityManager) {
+    public DepartmentDAO(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

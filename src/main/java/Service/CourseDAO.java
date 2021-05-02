@@ -6,10 +6,10 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class CourseService {
+public class CourseDAO {
 
     private EntityManager entityManager;
-    public CourseService(EntityManager entityManager) {
+    public CourseDAO(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
