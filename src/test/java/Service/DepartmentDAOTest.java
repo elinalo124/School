@@ -2,6 +2,8 @@ package Service;
 
 import Entities.Course;
 import Entities.Department;
+import Util.JPASessionUtil;
+import Util.Utility;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
@@ -14,6 +16,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DepartmentDAOTest {
 
+    @Test
+    @DisplayName("C")
+    public void saveDepartmentTest()
+    {
+        // Create our entity manager
+        EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
+        // Create repository
+        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
+        // Create two department and add 2 courses to their list of courses
+        Department department1 = Utility.createDepartment1();
+        Department department2 = Utility.createDepartment2();
+        departmentDAO.saveDepartment(department1);
+        departmentDAO.saveDepartment(department2);
+        List<Department> departments = departmentDAO.getAllDepartments();
+        assertEquals(department1.getName(), departments.get(0).getName());
+        entityManager.close();
+    }
+    /*
     @Test
     public void saveTest(){
         // Create our entity manager
@@ -107,5 +127,7 @@ class DepartmentDAOTest {
                         "Course(id=3, name=Course 2, description=Physics, department=Department 1)])"
                 , departmentDAO.findById(1).get().toString());
     }
+
+     */
 
 }

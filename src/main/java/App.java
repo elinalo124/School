@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class App {
     public static void main(String[] args){
+        /*
         // Create our entity manager
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Elina");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -66,5 +67,9 @@ public class App {
         entityManager.close();
         entityManagerFactory.close();
 
+
+         */
     }
+
+
 }

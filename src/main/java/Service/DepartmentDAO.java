@@ -8,8 +8,22 @@ import java.util.Optional;
 
 public class DepartmentDAO {
     private EntityManager entityManager;
-    public DepartmentDAO(EntityManager entityManager) {
+    public DepartmentDAO(EntityManager entityManager)
+    {
         this.entityManager = entityManager;
+    }
+
+    /*-----------------------------CRUD---------------------------------------*/
+    /*============CREATE============*/
+    public void saveDepartment(Department department) {
+        entityManager.getTransaction().begin();
+        entityManager.persist(department);
+        entityManager.getTransaction().commit();
+    }
+    /*============RETRIEVE============*/
+    public List<Department> getAllDepartments()
+    {
+        return entityManager.createQuery("from Department").getResultList();
     }
 
     public Optional<Department> findById(Integer id) {
@@ -17,9 +31,6 @@ public class DepartmentDAO {
         return department != null ? Optional.of(department) : Optional.empty();
     }
 
-    public List<Department> findAll() {
-        return entityManager.createQuery("from Department").getResultList();
-    }
 
     public Optional<Department> findByName(String name) {
         Department department = entityManager.createNamedQuery("Department.findByName", Department.class)
@@ -27,15 +38,5 @@ public class DepartmentDAO {
                 .getSingleResult();
         return department != null ? Optional.of(department) : Optional.empty();
     }
-    public Optional<Department> save(Department department) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(department);
-            entityManager.getTransaction().commit();
-            return Optional.of(department);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
-    }
+
 }
