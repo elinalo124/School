@@ -2,6 +2,7 @@ package Service;
 
 import Entities.Course;
 import Entities.Department;
+import Entities.Student;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -42,6 +43,22 @@ public class CourseDAO {
                 .setParameter("name", name)
                 .getSingleResult();
         return course != null ? Optional.of(course) : Optional.empty();
+    }
+    /*============UPDATE============*/
+    public void addStudent(Integer id, Student student)
+    {
+        entityManager.getTransaction().begin();
+        Course courseToUpdate = entityManager.find(Course.class, id);
+        courseToUpdate.addStudent(student);
+        entityManager.getTransaction().commit();
+    }
+    /*============DELETE============*/
+    public void deleteCourse(Course course)
+    {
+        entityManager.getTransaction().begin();
+        Department courseToDelete = entityManager.find(Department.class, course.getId());
+        entityManager.remove(courseToDelete);
+        entityManager.getTransaction().commit();
     }
 
 

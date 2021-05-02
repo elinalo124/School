@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Access(AccessType.FIELD)
@@ -26,7 +27,7 @@ public class Course {
     private Department department;
     @OneToOne(mappedBy = "course")
     private Teacher teacher;
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany(mappedBy = "courses",cascade = CascadeType.ALL)
     private List<Student> students;
 
     public Course(String name, String description) {
@@ -38,12 +39,14 @@ public class Course {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.students = new ArrayList<>();
     }
 
-    public void addTeacher(Teacher teacher){
-        this.setTeacher(teacher);
+
+    public void addStudent(Student student)
+    {
+        students.add(student);
     }
-    public void removeTeacher(){this.setTeacher(null);}
 
     @Override
     public String toString() {

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Access(AccessType.FIELD) //persistance at the level of the fields
@@ -16,9 +17,8 @@ import java.util.List;
                 query = "SELECT s FROM Student s")
 })
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class Student{
+public class Student extends User{
     @Id
-    @GeneratedValue
     private int id;
     private String name;
     private String major;
@@ -29,6 +29,17 @@ public class Student{
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
     private List<Course> courses;
 
+    public void addCourse(Course course)
+    {
+        courses.add(course);
+        course.addStudent(this);
+    }
+    public Student(int id, String firstName, String lastName, int id1, String major) {
+        super(id, firstName, lastName);
+        this.id = id1;
+        this.major = major;
+        this.courses = new ArrayList<>();
+    }
 
     @Override
     public String toString() {
