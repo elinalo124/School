@@ -57,19 +57,5 @@ public class DepartmentDAO {
         entityManager.remove(departmentToDelete);
         entityManager.getTransaction().commit();
     }
-    /*--------------------------------------------------------------*/
-
-    public Optional<Department> findById(Integer id) {
-        Department department = entityManager.find(Department.class, id);
-        return department != null ? Optional.of(department) : Optional.empty();
-    }
-
-
-    public Optional<Department> findByName(String name) {
-        Department department = entityManager.createNamedQuery("Department.findByName", Department.class)
-                .setParameter("name", name)
-                .getSingleResult();
-        return department != null ? Optional.of(department) : Optional.empty();
-    }
 
 }
