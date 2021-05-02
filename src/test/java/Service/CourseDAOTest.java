@@ -78,5 +78,22 @@ class CourseDAOTest {
         entityManager.close();
     }
 
-
+    @Test
+    @DisplayName("D")
+    public void deleteCourseTest()
+    {
+        /// Create our entity manager
+        EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
+        // Create repository
+        CourseDAO courseDAO = new CourseDAO(entityManager);
+        // Create two department and add 2 courses to their list of courses
+        Course course1 = new Course(1,"Course 1", "Maths");
+        Course course2 = new Course(2,"Course 2", "Physics");
+        courseDAO.saveCourse(course1);
+        courseDAO.saveCourse(course2);
+        courseDAO.deleteCourse(course1);
+        List<Course> retrievedCourses = courseDAO.getAllCourses();
+        assertEquals(1, retrievedCourses.size());
+        entityManager.close();
+    }
 }

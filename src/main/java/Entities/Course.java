@@ -53,7 +53,6 @@ public class Course {
 
         return "Course(id=" + id +
                 ", name=" + name +
-                ", description=" + description +
-                ", department=" + department.getName() + ")";
+                ", description=" + description;
     }
 }

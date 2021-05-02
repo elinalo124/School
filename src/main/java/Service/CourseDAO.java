@@ -55,8 +55,10 @@ public class CourseDAO {
     /*============DELETE============*/
     public void deleteCourse(Course course)
     {
+        System.out.println("Course passed to deleteDAO:"+course);
         entityManager.getTransaction().begin();
-        Department courseToDelete = entityManager.find(Department.class, course.getId());
+        Course courseToDelete = entityManager.find(Course.class, course.getId());
+        System.out.println("Course to delete:"+courseToDelete);
         entityManager.remove(courseToDelete);
         entityManager.getTransaction().commit();
     }
