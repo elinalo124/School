@@ -19,25 +19,21 @@ public class Teacher{
     @Id
     @GeneratedValue
     private int id;
-    private String name;
     private String education;
     @OneToOne
     private Course course;
 
     public Teacher(String name, String education) {
-        this.name = name;
         this.education = education;
     }
     public Teacher(int id, String name, String education) {
         this.id = id;
-        this.name = name;
         this.education = education;
     }
 
     @Override
     public String toString() {
         return "Teacher(id=" + id +
-                ", name=" + name +
                 ", education=" + education +
                 ", course=" + course + ")";
     }
