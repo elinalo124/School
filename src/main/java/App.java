@@ -1,14 +1,3 @@
-import Entities.Course;
-import Entities.Department;
-import Service.CourseDAO;
-import Service.DepartmentDAO;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import java.util.List;
-import java.util.Optional;
-
 public class App {
     public static void main(String[] args){
         /*
@@ -17,8 +6,8 @@ public class App {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         //-----------------------------------------------------------------------------------------
         // Create our repositories
-        CourseDAO courseDAO = new CourseDAO(entityManager);
-        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
+        CourseDAOImpl courseDAO = new CourseDAOImpl(entityManager);
+        DepartmentDAOImpl departmentDAO = new DepartmentDAOImpl(entityManager);
         //-----------------------------------------------------------------------------------------
 
         // Create an department and add 3 courses to his list of courses

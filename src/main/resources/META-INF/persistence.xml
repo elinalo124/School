@@ -6,8 +6,8 @@
         <!-- Persistence provider -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!-- Entity classes -->
-        <class>Entities.Department</class>
-        <class>Entities.Course</class>
+        <class>com.elina.model.Department</class>
+        <class>com.elina.model.Course</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="javax.persistence.jdbc.url"    value="jdbc:h2:mem:bookstore" />

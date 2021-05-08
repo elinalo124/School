@@ -1,2 +1,4 @@
-package com.elina.dao;public interface TeacherDAO {
+package com.elina.dao;
+
+public interface TeacherDAO {
 }

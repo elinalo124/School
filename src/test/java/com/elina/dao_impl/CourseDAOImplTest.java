@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CourseDAOTest {
+class CourseDAOImplTest {
 
 
     @Test
@@ -23,13 +23,13 @@ class CourseDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        CourseDAO courseDAO = new CourseDAO(entityManager);
+        CourseDAOImpl courseDAOImpl = new CourseDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Course course1 = Utility.createCourse1();
         Course course2 = Utility.createCourse2();
-        courseDAO.saveCourse(course1);
-        courseDAO.saveCourse(course2);
-        List<Course> courses = courseDAO.getAllCourses();
+        courseDAOImpl.saveCourse(course1);
+        courseDAOImpl.saveCourse(course2);
+        List<Course> courses = courseDAOImpl.getAllCourses();
         assertEquals(course1.getName(), courses.get(0).getName());
         entityManager.close();
     }
@@ -42,20 +42,20 @@ class CourseDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        CourseDAO courseDAO = new CourseDAO(entityManager);
+        CourseDAOImpl courseDAOImpl = new CourseDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Course course1 = Utility.createCourse1();
         Course course2 = Utility.createCourse2();
-        courseDAO.saveCourse(course1);
-        courseDAO.saveCourse(course2);
-        List savedCourses= new LinkedList();
+        courseDAOImpl.saveCourse(course1);
+        courseDAOImpl.saveCourse(course2);
+        List<Course> savedCourses= new LinkedList<>();
         savedCourses.add(course1);
         savedCourses.add(course2);
-        List<Course> retrievedCourses = courseDAO.getAllCourses();
+        List<Course> retrievedCourses = courseDAOImpl.getAllCourses();
         assertEquals(savedCourses, retrievedCourses);
-        assertEquals(course1,courseDAO.getCourseById(1).get());
-        assertEquals(course1,courseDAO.getCourseByName("Course 1").get());
-        //assertEquals(course1,courseDAO.getCourseByNameNamedQuery("Course 1").get());
+        assertEquals(course1, courseDAOImpl.getCourseById(1).get());
+        assertEquals(course1, courseDAOImpl.getCourseByName("Course 1").get());
+        //assertEquals(course1,courseDAOImpl.getCourseByNameNamedQuery("Course 1").get());
         entityManager.close();
     }
 
@@ -67,14 +67,14 @@ class CourseDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        CourseDAO courseDAO = new CourseDAO(entityManager);
+        CourseDAOImpl courseDAOImpl = new CourseDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Course course1 = Utility.createCourse1();
         Course course2 = Utility.createCourse2();
-        courseDAO.saveCourse(course1);
-        courseDAO.saveCourse(course2);
-        courseDAO.addStudent(1, new Student(1, "Elina", "Lo", 1, "Electronic engineering"));
-        assertEquals(course1.getStudents(), courseDAO.getCourseById(1).get().getStudents());
+        courseDAOImpl.saveCourse(course1);
+        courseDAOImpl.saveCourse(course2);
+        courseDAOImpl.addStudent(1, new Student(1, "Elina", "Lo", 1, "Electronic engineering"));
+        assertEquals(course1.getStudents(), courseDAOImpl.getCourseById(1).get().getStudents());
         entityManager.close();
     }
 
@@ -85,14 +85,14 @@ class CourseDAOTest {
         /// Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        CourseDAO courseDAO = new CourseDAO(entityManager);
+        CourseDAOImpl courseDAOImpl = new CourseDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Course course1 = new Course(1,"Course 1", "Maths");
         Course course2 = new Course(2,"Course 2", "Physics");
-        courseDAO.saveCourse(course1);
-        courseDAO.saveCourse(course2);
-        courseDAO.deleteCourse(course1);
-        List<Course> retrievedCourses = courseDAO.getAllCourses();
+        courseDAOImpl.saveCourse(course1);
+        courseDAOImpl.saveCourse(course2);
+        courseDAOImpl.deleteCourse(course1);
+        List<Course> retrievedCourses = courseDAOImpl.getAllCourses();
         assertEquals(1, retrievedCourses.size());
         entityManager.close();
     }

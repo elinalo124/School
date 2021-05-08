@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StudentDAOTest {
+class StudentDAOImplTest {
 
 
     @Test
@@ -42,18 +42,18 @@ class StudentDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        StudentDAO studentDAO = new StudentDAO(entityManager);
+        StudentDAOImpl studentDAOImpl = new StudentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Student student1 = new Student(1, "Elina", "Lo", 1, "Electronic engineering");
         Student student2 = new Student(2, "Elisa", "Lo", 2, "Geophysics");
-        studentDAO.saveStudent(student1);
-        studentDAO.saveStudent(student2);
-        List<Student> savedStudents= new LinkedList();
+        studentDAOImpl.saveStudent(student1);
+        studentDAOImpl.saveStudent(student2);
+        List<Student> savedStudents= new LinkedList<>();
         savedStudents.add(student1);
         savedStudents.add(student2);
-        List<Student> retrievedStudents = studentDAO.getAllStudents();
+        List<Student> retrievedStudents = studentDAOImpl.getAllStudents();
         assertEquals(savedStudents, retrievedStudents);
-        assertEquals(student1,studentDAO.getStudentById(1).get());
+        assertEquals(student1, studentDAOImpl.getStudentById(1).get());
         entityManager.close();
     }
 
@@ -64,15 +64,15 @@ class StudentDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        StudentDAO studentDAO = new StudentDAO(entityManager);
+        StudentDAOImpl studentDAOImpl = new StudentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Student student1 = new Student(1, "Elina", "Lo", 1, "Electronic engineering");
         Student student2 = new Student(2, "Elisa", "Lo", 2, "Geophysics");
-        studentDAO.saveStudent(student1);
-        studentDAO.saveStudent(student2);
+        studentDAOImpl.saveStudent(student1);
+        studentDAOImpl.saveStudent(student2);
         String newMajor = "Fashion design";
-        studentDAO.changeMajor(1, newMajor);
-        assertEquals(newMajor, studentDAO.getStudentById(1).get().getMajor());
+        studentDAOImpl.changeMajor(1, newMajor);
+        assertEquals(newMajor, studentDAOImpl.getStudentById(1).get().getMajor());
         entityManager.close();
     }
 
@@ -83,14 +83,14 @@ class StudentDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        StudentDAO studentDAO = new StudentDAO(entityManager);
+        StudentDAOImpl studentDAOImpl = new StudentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Student student1 = new Student(1, "Elina", "Lo", 1, "Electronic engineering");
         Student student2 = new Student(2, "Elisa", "Lo", 2, "Geophysics");
-        studentDAO.saveStudent(student1);
-        studentDAO.saveStudent(student2);
-        studentDAO.deleteStudent(student1);
-        List<Student> retrievedStudents = studentDAO.getAllStudents();
+        studentDAOImpl.saveStudent(student1);
+        studentDAOImpl.saveStudent(student2);
+        studentDAOImpl.deleteStudent(student1);
+        List<Student> retrievedStudents = studentDAOImpl.getAllStudents();
         assertEquals(1, retrievedStudents.size());
         entityManager.close();
     }

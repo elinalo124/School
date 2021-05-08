@@ -1,4 +1,4 @@
-package Util;
+package com.elina.util;
 
 import org.hibernate.Session;
 

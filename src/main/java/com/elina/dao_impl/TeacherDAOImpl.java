@@ -1,4 +1,4 @@
 package com.elina.dao_impl;
 
-public class TeacherDAO {
+public class TeacherDAOImpl {
 }

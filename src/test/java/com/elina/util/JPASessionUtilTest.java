@@ -1,4 +1,4 @@
-package Util;
+package com.elina.util;
 
 import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ class JPASessionUtilTest {
 
     @Test
     public void getEntityManager() {
-        EntityManager em = Util.JPASessionUtil.getEntityManager("Elina");
+        EntityManager em = JPASessionUtil.getEntityManager("Elina");
         em.close();
     }
 
@@ -19,7 +19,7 @@ class JPASessionUtilTest {
     public void nonexistentEntityManagerName() {
         Exception exception = assertThrows(
                 javax.persistence.PersistenceException.class,
-                () -> Util.JPASessionUtil.getEntityManager("nonexistent")
+                () -> JPASessionUtil.getEntityManager("nonexistent")
         );
         //System.out.print(exception.getMessage());
         assertTrue(exception.getMessage().contains("No Persistence provider for EntityManager named nonexistent"));
@@ -28,14 +28,14 @@ class JPASessionUtilTest {
 
     @Test
     public void getSession() {
-        Session session = Util.JPASessionUtil.getSession("Elina");
+        Session session = JPASessionUtil.getSession("Elina");
         session.close();
     }
     @Test()
     public void nonexistentSessionName() {
         Exception exception = assertThrows(
                 javax.persistence.PersistenceException.class,
-                () -> Util.JPASessionUtil.getSession("nonexistent")
+                () -> JPASessionUtil.getSession("nonexistent")
         );
         //System.out.print(exception.getMessage());
         assertTrue(exception.getMessage().contains("No Persistence provider for EntityManager named nonexistent"));

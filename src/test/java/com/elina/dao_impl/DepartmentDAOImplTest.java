@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DepartmentDAOTest {
+class DepartmentDAOImplTest {
 
     @Test
     @DisplayName("C")
@@ -21,13 +21,13 @@ class DepartmentDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Department department1 = Utility.createDepartment1();
         Department department2 = Utility.createDepartment2();
-        departmentDAO.saveDepartment(department1);
-        departmentDAO.saveDepartment(department2);
-        List<Department> departments = departmentDAO.getAllDepartments();
+        departmentDAOImpl.saveElement(department1);
+        departmentDAOImpl.saveElement(department2);
+        List<Department> departments = departmentDAOImpl.retrieveAllElements();
         assertEquals(department1.getName(), departments.get(0).getName());
         entityManager.close();
     }
@@ -38,19 +38,19 @@ class DepartmentDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Department department1 = Utility.createDepartment1();
         Department department2 = Utility.createDepartment2();
-        List savedDepartments = new LinkedList();
+        List<Department> savedDepartments = new LinkedList<>();
         savedDepartments.add(department1);
         savedDepartments.add(department2);
-        departmentDAO.saveDepartment(department1);
-        departmentDAO.saveDepartment(department2);
-        List<Department> retrievedDepartments = departmentDAO.getAllDepartments();
+        departmentDAOImpl.saveElement(department1);
+        departmentDAOImpl.saveElement(department2);
+        List<Department> retrievedDepartments = departmentDAOImpl.retrieveAllElements();
         assertEquals(savedDepartments, retrievedDepartments);
-        assertEquals(department1,departmentDAO.getDepartmentById(1).get());
-        assertEquals(department1,departmentDAO.getDepartmentByName("Department 1").get());
+        assertEquals(department1, departmentDAOImpl.retrieveElementByID(1).get());
+        assertEquals(department1, departmentDAOImpl.getDepartmentByName("Department 1").get());
         entityManager.close();
     }
     @Test
@@ -60,14 +60,14 @@ class DepartmentDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Department department1 = Utility.createDepartment1();
         Department department2 = Utility.createDepartment2();
-        departmentDAO.saveDepartment(department1);
-        departmentDAO.saveDepartment(department2);
-        departmentDAO.addCourse(1, new Course(4,"Course 4", "Classic Control"));
-        assertEquals(department1.getCourses(), departmentDAO.getDepartmentById(1).get().getCourses());
+        departmentDAOImpl.saveElement(department1);
+        departmentDAOImpl.saveElement(department2);
+        departmentDAOImpl.addCourse(1, new Course(4,"Course 4", "Classic Control"));
+        assertEquals(department1.getCourses(), departmentDAOImpl.retrieveElementByID(1).get().getCourses());
         entityManager.close();
     }
 
@@ -78,14 +78,14 @@ class DepartmentDAOTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        DepartmentDAO departmentDAO = new DepartmentDAO(entityManager);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
         Department department1 = Utility.createDepartment1();
         Department department2 = Utility.createDepartment2();
-        departmentDAO.saveDepartment(department1);
-        departmentDAO.saveDepartment(department2);
-        departmentDAO.deleteDepartment(department1);
-        List<Department> retrievedDepartments = departmentDAO.getAllDepartments();
+        departmentDAOImpl.saveElement(department1);
+        departmentDAOImpl.saveElement(department2);
+        departmentDAOImpl.deleteElement(department1);
+        List<Department> retrievedDepartments = departmentDAOImpl.retrieveAllElements();
         assertEquals(1, retrievedDepartments.size());
         entityManager.close();
     }

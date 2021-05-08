@@ -7,10 +7,10 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class CourseDAO {
+public class CourseDAOImpl {
 
     private EntityManager entityManager;
-    public CourseDAO(EntityManager entityManager)
+    public CourseDAOImpl(EntityManager entityManager)
     {
         this.entityManager = entityManager;
     }

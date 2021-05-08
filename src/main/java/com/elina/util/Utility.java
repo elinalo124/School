@@ -1,4 +1,4 @@
-package Util;
+package com.elina.util;
 
 import com.elina.model.Course;
 import com.elina.model.Department;

@@ -6,10 +6,10 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class StudentDAO {
+public class StudentDAOImpl {
 
     private EntityManager entityManager;
-    public StudentDAO(EntityManager entityManager)
+    public StudentDAOImpl(EntityManager entityManager)
     {
         this.entityManager = entityManager;
     }
