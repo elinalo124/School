@@ -26,21 +26,8 @@ public class Department {
             orphanRemoval = true)
     private List<Course> courses = new LinkedList<>();
 
-    public void addCourse(Course course) {courses.add(course);course.setDepartment(this);}
-    public void removeCourse(Course course) {courses.remove(course);course.setDepartment(null);}
-
-    public Department(String name) {
-        this.name = name;
-    }
-    public Department(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     @Override
     public String toString() {
-        return "Department(id=" + id +
-                ", name=" + name +
-                ", courses="+courses.toString()+")";
+        return "Department(id=" + id + ", name=" + name + ", courses="+courses.toString()+")";
     }
 }

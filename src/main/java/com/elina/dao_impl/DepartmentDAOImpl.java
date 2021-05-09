@@ -57,7 +57,7 @@ public class DepartmentDAOImpl implements DepartmentDAO{
     {
         entityManager.getTransaction().begin();
         Department departmentToUpdate = entityManager.find(Department.class, id);
-        departmentToUpdate.addCourse(course);
+        departmentToUpdate.getCourses().add(course);
         entityManager.getTransaction().commit();
     }
 
