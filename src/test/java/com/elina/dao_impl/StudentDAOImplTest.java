@@ -26,9 +26,9 @@ class StudentDAOImplTest {
         // Create two department and add 2 courses to their list of courses
         Course course1 = Utility.createCourse1();
         Course course2 = Utility.createCourse2();
-        courseDAOImpl.saveCourse(course1);
-        courseDAOImpl.saveCourse(course2);
-        List<Course> courses = courseDAOImpl.getAllCourses();
+        courseDAOImpl.saveElement(course1);
+        courseDAOImpl.saveElement(course2);
+        List<Course> courses = courseDAOImpl.retrieveAllElements();
         assertEquals(course1.getName(), courses.get(0).getName());
         entityManager.close();
     }

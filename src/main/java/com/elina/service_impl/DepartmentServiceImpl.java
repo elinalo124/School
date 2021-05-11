@@ -15,29 +15,36 @@ public class DepartmentServiceImpl implements DepartmentService {
     DepartmentDAO departmentDAOImpl = new DepartmentDAOImpl(JPASessionUtil.getEntityManager("Elina"));
 
     /*-----CREATE-----*/
-    public void saveDepartment(Department department){
+    public void saveDepartment(Department department)
+    {
         departmentDAOImpl.saveElement(department);
     }
     /*-----RETRIEVE-----*/
-    public List<Department> retrieveAllDepartments(){
+    public List<Department> retrieveAllDepartments()
+    {
         return departmentDAOImpl.retrieveAllElements();
     }
-    public Optional<Department> retrieveDepartmentByID (int id){
+    public Optional<Department> retrieveDepartmentByID (int id)
+    {
         return departmentDAOImpl.retrieveElementByID(id);
     }
     /*-----UPDATE-----*/
-    public void updateDepartment(Department department){
+    public void updateDepartment(Department department)
+    {
         departmentDAOImpl.updateElement(department);
     }
     /*-----DELETE-----*/
-    public void deleteDepartment(Department department) {
+    public void deleteDepartment(Department department)
+    {
         departmentDAOImpl.deleteElement(department);
     }
     /*-----OTHER-----*/
-    public Optional<Department> getDepartmentByName(String name){
-        return departmentDAOImpl.getDepartmentByName(name);
+    public Optional<Department> retrieveDepartmentByName(String name)
+    {
+        return departmentDAOImpl.retrieveDepartmentByName(name);
     }
-    public void addCourse(Integer id, Course course){
+    public void addCourse(Integer id, Course course)
+    {
         departmentDAOImpl.addCourse(id,course);
     }
 

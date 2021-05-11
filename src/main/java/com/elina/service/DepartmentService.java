@@ -18,7 +18,7 @@ public interface DepartmentService {
     /*-----DELETE-----*/
     void deleteDepartment(Department department);
     /*-----OTHER-----*/
-    Optional<Department> getDepartmentByName(String name);
+    Optional<Department> retrieveDepartmentByName(String name);
     void addCourse(Integer id, Course course);
 
 }

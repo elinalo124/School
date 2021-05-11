@@ -1,15 +1,12 @@
 package com.elina.service_impl;
 
-import com.elina.dao_impl.DepartmentDAOImpl;
 import com.elina.model.Course;
 import com.elina.model.Department;
 import com.elina.service.DepartmentService;
-import com.elina.util.JPASessionUtil;
 import com.elina.util.Utility;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import javax.persistence.EntityManager;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,7 +43,7 @@ class DepartmentServiceImplTest {
         List<Department> retrievedDepartments = departmentService.retrieveAllDepartments();
         assertEquals(savedDepartments, retrievedDepartments);
         assertEquals(department1, departmentService.retrieveDepartmentByID(1).get());
-        assertEquals(department1, departmentService.getDepartmentByName("Department 1").get());
+        assertEquals(department1, departmentService.retrieveDepartmentByName("Department 1").get());
     }
 
     @Test
@@ -77,8 +74,6 @@ class DepartmentServiceImplTest {
         List<Department> retrievedDepartments = departmentService.retrieveAllDepartments();
         assertEquals(1, retrievedDepartments.size());
     }
-
-
 
 
 }

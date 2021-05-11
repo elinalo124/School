@@ -25,9 +25,9 @@ class CourseDAOImplTest {
         // Create two department and add 2 courses to their list of courses
         Course course1 = Utility.createCourse1();
         Course course2 = Utility.createCourse2();
-        courseDAOImpl.saveCourse(course1);
-        courseDAOImpl.saveCourse(course2);
-        List<Course> courses = courseDAOImpl.getAllCourses();
+        courseDAOImpl.saveElement(course1);
+        courseDAOImpl.saveElement(course2);
+        List<Course> courses = courseDAOImpl.retrieveAllElements();
         assertEquals(course1.getName(), courses.get(0).getName());
         entityManager.close();
     }
@@ -44,15 +44,15 @@ class CourseDAOImplTest {
         // Create two department and add 2 courses to their list of courses
         Course course1 = Utility.createCourse1();
         Course course2 = Utility.createCourse2();
-        courseDAOImpl.saveCourse(course1);
-        courseDAOImpl.saveCourse(course2);
+        courseDAOImpl.saveElement(course1);
+        courseDAOImpl.saveElement(course2);
         List<Course> savedCourses= new LinkedList<>();
         savedCourses.add(course1);
         savedCourses.add(course2);
-        List<Course> retrievedCourses = courseDAOImpl.getAllCourses();
+        List<Course> retrievedCourses = courseDAOImpl.retrieveAllElements();
         assertEquals(savedCourses, retrievedCourses);
-        assertEquals(course1, courseDAOImpl.getCourseById(1).get());
-        assertEquals(course1, courseDAOImpl.getCourseByName("Course 1").get());
+        assertEquals(course1, courseDAOImpl.retrieveElementByID(1).get());
+        assertEquals(course1, courseDAOImpl.retrieveCourseByName("Course 1").get());
         //assertEquals(course1,courseDAOImpl.getCourseByNameNamedQuery("Course 1").get());
         entityManager.close();
     }
@@ -69,10 +69,10 @@ class CourseDAOImplTest {
         // Create two department and add 2 courses to their list of courses
         Course course1 = Utility.createCourse1();
         Course course2 = Utility.createCourse2();
-        courseDAOImpl.saveCourse(course1);
-        courseDAOImpl.saveCourse(course2);
+        courseDAOImpl.saveElement(course1);
+        courseDAOImpl.saveElement(course2);
         courseDAOImpl.addStudent(1, new Student(1, "Elina", "Lo", 1, "Electronic engineering"));
-        assertEquals(course1.getStudents(), courseDAOImpl.getCourseById(1).get().getStudents());
+        assertEquals(course1.getStudents(), courseDAOImpl.retrieveElementByID(1).get().getStudents());
         entityManager.close();
     }
 
@@ -87,10 +87,10 @@ class CourseDAOImplTest {
         // Create two department and add 2 courses to their list of courses
         Course course1 = new Course(1,"Course 1", "Maths");
         Course course2 = new Course(2,"Course 2", "Physics");
-        courseDAOImpl.saveCourse(course1);
-        courseDAOImpl.saveCourse(course2);
-        courseDAOImpl.deleteCourse(course1);
-        List<Course> retrievedCourses = courseDAOImpl.getAllCourses();
+        courseDAOImpl.saveElement(course1);
+        courseDAOImpl.saveElement(course2);
+        courseDAOImpl.deleteElement(course1);
+        List<Course> retrievedCourses = courseDAOImpl.retrieveAllElements();
         assertEquals(1, retrievedCourses.size());
         entityManager.close();
     }

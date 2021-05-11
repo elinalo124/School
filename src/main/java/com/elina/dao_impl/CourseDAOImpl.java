@@ -1,13 +1,15 @@
 package com.elina.dao_impl;
 
+import com.elina.dao.CourseDAO;
 import com.elina.model.Course;
+import com.elina.model.Department;
 import com.elina.model.Student;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class CourseDAOImpl {
+public class CourseDAOImpl implements CourseDAO {
 
     private EntityManager entityManager;
     public CourseDAOImpl(EntityManager entityManager)
@@ -17,7 +19,7 @@ public class CourseDAOImpl {
 
     /*-----------------------------CRUD---------------------------------------*/
     /*============CREATE============*/
-    public void saveCourse(Course course)
+    public void saveElement(Course course)
     {
         entityManager.getTransaction().begin();
         entityManager.persist(course);
@@ -25,18 +27,18 @@ public class CourseDAOImpl {
     }
 
     /*============RETRIEVE============*/
-    public List<Course> getAllCourses()
+    public List<Course> retrieveAllElements()
     {
         return entityManager.createQuery("from Course").getResultList();
     }
 
-    public Optional<Course> getCourseById(Integer id)
+    public Optional<Course> retrieveElementByID(int id)
     {
         Course course = entityManager.find(Course.class, id);
         return course != null ? Optional.of(course) : Optional.empty();
     }
 
-    public Optional<Course> getCourseByName(String name)
+    public Optional<Course> retrieveCourseByName(String name)
     {
         Course course = entityManager.createQuery("SELECT c FROM Course c WHERE c.name = :name", Course.class)
                 .setParameter("name", name)
@@ -44,15 +46,21 @@ public class CourseDAOImpl {
         return course != null ? Optional.of(course) : Optional.empty();
     }
     /*============UPDATE============*/
-    public void addStudent(Integer id, Student student)
+    public void updateElement(Course course){
+        entityManager.getTransaction().begin();
+        Course courseToUpdate = entityManager.find(Course.class, course.getId());
+        entityManager.merge(courseToUpdate);
+        entityManager.getTransaction().commit();
+    }
+    public void addStudent(int id, Student student)
     {
         entityManager.getTransaction().begin();
         Course courseToUpdate = entityManager.find(Course.class, id);
-        courseToUpdate.addStudent(student);
+        courseToUpdate.getStudents().add(student);
         entityManager.getTransaction().commit();
     }
     /*============DELETE============*/
-    public void deleteCourse(Course course)
+    public void deleteElement(Course course)
     {
         System.out.println("Course passed to deleteDAO:"+course);
         entityManager.getTransaction().begin();

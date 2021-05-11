@@ -18,27 +18,24 @@ public class DepartmentDAOImpl implements DepartmentDAO{
 
     /*-----------------------------CRUD---------------------------------------*/
     /*============CREATE============*/
-    @Override
     public void saveElement(Department department) {
         entityManager.getTransaction().begin();
         entityManager.persist(department);
         entityManager.getTransaction().commit();
     }
     /*============RETRIEVE============*/
-    @Override
     public List<Department> retrieveAllElements()
     {
         return entityManager.createQuery("from Department").getResultList();
     }
 
-    @Override
     public Optional<Department> retrieveElementByID(int id) {
         Department department = entityManager.find(Department.class, id);
         return department != null? Optional.of(department): Optional.empty();
     }
 
 
-    public Optional<Department> getDepartmentByName(String name)
+    public Optional<Department> retrieveDepartmentByName(String name)
     {
         Department department = entityManager.createNamedQuery("Department.findByName", Department.class)
                 .setParameter("name", name)
@@ -46,7 +43,6 @@ public class DepartmentDAOImpl implements DepartmentDAO{
         return department != null ? Optional.of(department) : Optional.empty();
     }
     /*============UPDATE============*/
-    @Override
     public void updateElement(Department department){
         entityManager.getTransaction().begin();
         Department departmentToUpdate = entityManager.find(Department.class, department.getId());
@@ -62,7 +58,6 @@ public class DepartmentDAOImpl implements DepartmentDAO{
     }
 
     /*============DELETE============*/
-    @Override
     public void deleteElement(Department department)
     {
         entityManager.getTransaction().begin();

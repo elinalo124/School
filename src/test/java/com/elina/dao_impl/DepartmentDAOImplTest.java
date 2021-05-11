@@ -50,7 +50,7 @@ class DepartmentDAOImplTest {
         List<Department> retrievedDepartments = departmentDAOImpl.retrieveAllElements();
         assertEquals(savedDepartments, retrievedDepartments);
         assertEquals(department1, departmentDAOImpl.retrieveElementByID(1).get());
-        assertEquals(department1, departmentDAOImpl.getDepartmentByName("Department 1").get());
+        assertEquals(department1, departmentDAOImpl.retrieveDepartmentByName("Department 1").get());
         entityManager.close();
     }
     @Test
