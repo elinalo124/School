@@ -1,12 +1,13 @@
 package com.elina.dao_impl;
 
+import com.elina.dao.StudentDAO;
 import com.elina.model.Student;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class StudentDAOImpl {
+public class StudentDAOImpl implements StudentDAO {
 
     private EntityManager entityManager;
     public StudentDAOImpl(EntityManager entityManager)
@@ -16,25 +17,34 @@ public class StudentDAOImpl {
 
     /*-----------------------------CRUD---------------------------------------*/
     /*============CREATE============*/
-    public void saveStudent(Student student)
+    public void saveElement(Student student)
     {
         entityManager.getTransaction().begin();
         entityManager.persist(student);
         entityManager.getTransaction().commit();
     }
     /*============RETRIEVE============*/
-    public List<Student> getAllStudents()
+    public List<Student> retrieveAllElements()
     {
         return entityManager.createQuery("from Student").getResultList();
     }
 
-    public Optional<Student> getStudentById(Integer id)
+    public Optional<Student> retrieveElementByID(int id)
     {
         Student student = entityManager.find(Student.class, id);
         return student != null ? Optional.of(student) : Optional.empty();
     }
 
     /*============UPDATE============*/
+
+    public void updateElement(Student student)
+    {
+        entityManager.getTransaction().begin();
+        Student studentToUpdate = entityManager.find(Student.class, student.getId());
+        entityManager.merge(studentToUpdate);
+        entityManager.getTransaction().commit();
+    }
+
     public void changeMajor(Integer id, String major)
     {
         entityManager.getTransaction().begin();
@@ -44,7 +54,7 @@ public class StudentDAOImpl {
     }
 
     /*============DELETE============*/
-    public void deleteStudent(Student student)
+    public void deleteElement(Student student)
     {
         entityManager.getTransaction().begin();
         Student studentToDelete = entityManager.find(Student.class, student.getId());
@@ -52,6 +62,5 @@ public class StudentDAOImpl {
         entityManager.remove(studentToDelete);
         entityManager.getTransaction().commit();
     }
-
 
 }

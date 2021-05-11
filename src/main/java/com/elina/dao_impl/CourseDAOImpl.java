@@ -46,7 +46,8 @@ public class CourseDAOImpl implements CourseDAO {
         return course != null ? Optional.of(course) : Optional.empty();
     }
     /*============UPDATE============*/
-    public void updateElement(Course course){
+    public void updateElement(Course course)
+    {
         entityManager.getTransaction().begin();
         Course courseToUpdate = entityManager.find(Course.class, course.getId());
         entityManager.merge(courseToUpdate);

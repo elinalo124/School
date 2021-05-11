@@ -22,14 +22,14 @@ class StudentDAOImplTest {
         // Create our entity manager
         EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
         // Create repository
-        CourseDAOImpl courseDAOImpl = new CourseDAOImpl(entityManager);
+        StudentDAOImpl studentDAOImpl = new StudentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
-        Course course1 = Utility.createCourse1();
-        Course course2 = Utility.createCourse2();
-        courseDAOImpl.saveElement(course1);
-        courseDAOImpl.saveElement(course2);
-        List<Course> courses = courseDAOImpl.retrieveAllElements();
-        assertEquals(course1.getName(), courses.get(0).getName());
+        Student student1 = Utility.createStudent1();
+        Student student2 = Utility.createStudent2();
+        studentDAOImpl.saveElement(student1);
+        studentDAOImpl.saveElement(student2);
+        List<Student> students = studentDAOImpl.retrieveAllElements();
+        assertEquals(student1.getFirstName(), students.get(0).getFirstName());
         entityManager.close();
     }
 
@@ -43,16 +43,16 @@ class StudentDAOImplTest {
         // Create repository
         StudentDAOImpl studentDAOImpl = new StudentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
-        Student student1 = new Student(1, "Elina", "Lo", 1, "Electronic engineering");
-        Student student2 = new Student(2, "Elisa", "Lo", 2, "Geophysics");
-        studentDAOImpl.saveStudent(student1);
-        studentDAOImpl.saveStudent(student2);
+        Student student1 = Utility.createStudent1();
+        Student student2 = Utility.createStudent2();
+        studentDAOImpl.saveElement(student1);
+        studentDAOImpl.saveElement(student2);
         List<Student> savedStudents= new LinkedList<>();
         savedStudents.add(student1);
         savedStudents.add(student2);
-        List<Student> retrievedStudents = studentDAOImpl.getAllStudents();
+        List<Student> retrievedStudents = studentDAOImpl.retrieveAllElements();
         assertEquals(savedStudents, retrievedStudents);
-        assertEquals(student1, studentDAOImpl.getStudentById(1).get());
+        assertEquals(student1, studentDAOImpl.retrieveElementByID(1).get());
         entityManager.close();
     }
 
@@ -65,13 +65,13 @@ class StudentDAOImplTest {
         // Create repository
         StudentDAOImpl studentDAOImpl = new StudentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
-        Student student1 = new Student(1, "Elina", "Lo", 1, "Electronic engineering");
-        Student student2 = new Student(2, "Elisa", "Lo", 2, "Geophysics");
-        studentDAOImpl.saveStudent(student1);
-        studentDAOImpl.saveStudent(student2);
+        Student student1 = Utility.createStudent1();
+        Student student2 = Utility.createStudent2();
+        studentDAOImpl.saveElement(student1);
+        studentDAOImpl.saveElement(student2);
         String newMajor = "Fashion design";
         studentDAOImpl.changeMajor(1, newMajor);
-        assertEquals(newMajor, studentDAOImpl.getStudentById(1).get().getMajor());
+        assertEquals(newMajor, studentDAOImpl.retrieveElementByID(1).get().getMajor());
         entityManager.close();
     }
 
@@ -84,12 +84,12 @@ class StudentDAOImplTest {
         // Create repository
         StudentDAOImpl studentDAOImpl = new StudentDAOImpl(entityManager);
         // Create two department and add 2 courses to their list of courses
-        Student student1 = new Student(1, "Elina", "Lo", 1, "Electronic engineering");
-        Student student2 = new Student(2, "Elisa", "Lo", 2, "Geophysics");
-        studentDAOImpl.saveStudent(student1);
-        studentDAOImpl.saveStudent(student2);
-        studentDAOImpl.deleteStudent(student1);
-        List<Student> retrievedStudents = studentDAOImpl.getAllStudents();
+        Student student1 = Utility.createStudent1();
+        Student student2 = Utility.createStudent2();
+        studentDAOImpl.saveElement(student1);
+        studentDAOImpl.saveElement(student2);
+        studentDAOImpl.deleteElement(student1);
+        List<Student> retrievedStudents = studentDAOImpl.retrieveAllElements();
         assertEquals(1, retrievedStudents.size());
         entityManager.close();
     }

@@ -1,4 +1,7 @@
 package com.elina.dao;
 
-public interface StudentDAO {
+import com.elina.model.Student;
+
+public interface StudentDAO extends CRUD<Student>{
+    public void changeMajor(Integer id, String major);
 }

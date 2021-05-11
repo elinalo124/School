@@ -18,7 +18,8 @@ public class DepartmentDAOImpl implements DepartmentDAO{
 
     /*-----------------------------CRUD---------------------------------------*/
     /*============CREATE============*/
-    public void saveElement(Department department) {
+    public void saveElement(Department department)
+    {
         entityManager.getTransaction().begin();
         entityManager.persist(department);
         entityManager.getTransaction().commit();
@@ -29,7 +30,8 @@ public class DepartmentDAOImpl implements DepartmentDAO{
         return entityManager.createQuery("from Department").getResultList();
     }
 
-    public Optional<Department> retrieveElementByID(int id) {
+    public Optional<Department> retrieveElementByID(int id)
+    {
         Department department = entityManager.find(Department.class, id);
         return department != null? Optional.of(department): Optional.empty();
     }
@@ -43,7 +45,8 @@ public class DepartmentDAOImpl implements DepartmentDAO{
         return department != null ? Optional.of(department) : Optional.empty();
     }
     /*============UPDATE============*/
-    public void updateElement(Department department){
+    public void updateElement(Department department)
+    {
         entityManager.getTransaction().begin();
         Department departmentToUpdate = entityManager.find(Department.class, department.getId());
         entityManager.merge(departmentToUpdate);
