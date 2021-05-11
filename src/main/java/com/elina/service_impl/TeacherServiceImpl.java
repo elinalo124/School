@@ -1,4 +1,42 @@
 package com.elina.service_impl;
 
+import com.elina.dao.StudentDAO;
+import com.elina.dao.TeacherDAO;
+import com.elina.dao_impl.StudentDAOImpl;
+import com.elina.dao_impl.TeacherDAOImpl;
+import com.elina.model.Student;
+import com.elina.model.Teacher;
+import com.elina.util.JPASessionUtil;
+
+import java.util.List;
+import java.util.Optional;
+
 public class TeacherServiceImpl {
+    TeacherDAO teacherDAOImpl = new TeacherDAOImpl(JPASessionUtil.getEntityManager("Elina"));
+
+    /*-----CREATE-----*/
+    public void saveTeacher(Teacher teacher)
+    {
+        teacherDAOImpl.saveElement(teacher);
+    }
+    /*-----RETRIEVE-----*/
+    public List<Teacher> retrieveAllTeachers()
+    {
+        return teacherDAOImpl.retrieveAllElements();
+    }
+    public Optional<Teacher> retrieveTeacherByID (int id)
+    {
+        return teacherDAOImpl.retrieveElementByID(id);
+    }
+    /*-----UPDATE-----*/
+    public void updateTeacher(Teacher teacher)
+    {
+        teacherDAOImpl.updateElement(teacher);
+    }
+    /*-----DELETE-----*/
+    public void deleteTeacher(Teacher teacher)
+    {
+        teacherDAOImpl.deleteElement(teacher);
+    }
+
 }

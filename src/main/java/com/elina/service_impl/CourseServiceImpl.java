@@ -1,11 +1,8 @@
 package com.elina.service_impl;
 
 import com.elina.dao.CourseDAO;
-import com.elina.dao.DepartmentDAO;
 import com.elina.dao_impl.CourseDAOImpl;
-import com.elina.dao_impl.DepartmentDAOImpl;
 import com.elina.model.Course;
-import com.elina.model.Department;
 import com.elina.model.Student;
 import com.elina.util.JPASessionUtil;
 

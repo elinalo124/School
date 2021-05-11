@@ -27,7 +27,8 @@ public class Department {
     private List<Course> courses = new LinkedList<>();
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Department(id=" + id + ", name=" + name + ", courses="+courses.toString()+")";
     }
 }

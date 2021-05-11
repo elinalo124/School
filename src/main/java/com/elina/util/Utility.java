@@ -3,6 +3,7 @@ package com.elina.util;
 import com.elina.model.Course;
 import com.elina.model.Department;
 import com.elina.model.Student;
+import com.elina.model.Teacher;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -41,5 +42,20 @@ public class Utility {
     public static Student createStudent2()
     {
         return new Student(2, "Elisa", "Lo", 2, "Geophysics");
+    }
+
+    public static Teacher createTeacher1()
+    {
+        Teacher teacher1 = new Teacher(1,"Mathematician", createCourse1());
+        teacher1.setFirstName("Eleonora");
+        teacher1.setLastName("Lo");
+        return teacher1;
+    }
+    public static Teacher createTeacher2()
+    {
+        Teacher teacher1 = new Teacher(2,"Physician", createCourse2());
+        teacher1.setFirstName("Pizza");
+        teacher1.setLastName("Tacos");
+        return teacher1;
     }
 }

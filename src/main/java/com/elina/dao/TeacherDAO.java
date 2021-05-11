@@ -1,4 +1,6 @@
 package com.elina.dao;
 
-public interface TeacherDAO {
+import com.elina.model.Teacher;
+
+public interface TeacherDAO extends CRUD<Teacher>{
 }

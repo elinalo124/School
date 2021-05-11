@@ -27,14 +27,6 @@ public class Teacher extends User{
     @OneToOne
     private Course course;
 
-    public Teacher(String name, String education) {
-        this.education = education;
-    }
-    public Teacher(int id, String name, String education) {
-        this.id = id;
-        this.education = education;
-    }
-
     @Override
     public String toString() {
         return "Teacher(id=" + id +
