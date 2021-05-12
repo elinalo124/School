@@ -49,9 +49,10 @@ class TeacherServiceImplTest {
     @DisplayName("U")
     public void changeMajorTest()
     {
-        CourseServiceImpl courseService = new CourseServiceImpl();
-        Course newCourse= new Course(4,"Course 4", "Electric Machines");
-        courseService.saveCourse(newCourse);
+        //CourseServiceImpl courseService = new CourseServiceImpl();
+
+
+        //courseService.saveCourse(newCourse);
 
         TeacherServiceImpl teacherService = new TeacherServiceImpl();
         // Create two department and add 2 courses to their list of courses
@@ -59,6 +60,9 @@ class TeacherServiceImplTest {
         Teacher teacher2 = Utility.createTeacher2();
         teacherService.saveTeacher(teacher1);
         teacherService.saveTeacher(teacher2);
+
+        Course newCourse= new Course(4,"Course 4", "Electric Machines");
+        teacherService.saveCourse(newCourse);
 
         teacher1.setCourse(newCourse);
         teacherService.updateTeacher(teacher1);

@@ -1,6 +1,7 @@
 package com.elina.dao_impl;
 
 import com.elina.dao.TeacherDAO;
+import com.elina.model.Course;
 import com.elina.model.Student;
 import com.elina.model.Teacher;
 
@@ -54,6 +55,12 @@ public class TeacherDAOImpl implements TeacherDAO {
         Teacher teacherToDelete = entityManager.find(Teacher.class, teacher.getId());
         System.out.print(teacherToDelete);
         entityManager.remove(teacherToDelete);
+        entityManager.getTransaction().commit();
+    }
+
+    public void saveCourse(Course course){
+        entityManager.getTransaction().begin();
+        entityManager.persist(course);
         entityManager.getTransaction().commit();
     }
 }

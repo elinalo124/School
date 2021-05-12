@@ -1,18 +1,24 @@
 package com.elina.service_impl;
 
+import com.elina.dao.CourseDAO;
 import com.elina.dao.StudentDAO;
 import com.elina.dao.TeacherDAO;
+import com.elina.dao_impl.CourseDAOImpl;
 import com.elina.dao_impl.StudentDAOImpl;
 import com.elina.dao_impl.TeacherDAOImpl;
+import com.elina.model.Course;
 import com.elina.model.Student;
 import com.elina.model.Teacher;
 import com.elina.util.JPASessionUtil;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
 public class TeacherServiceImpl {
-    TeacherDAO teacherDAOImpl = new TeacherDAOImpl(JPASessionUtil.getEntityManager("Elina"));
+    EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
+    TeacherDAO teacherDAOImpl = new TeacherDAOImpl(entityManager);
+    CourseDAO courseDAOImpl = new CourseDAOImpl(entityManager);
 
     /*-----CREATE-----*/
     public void saveTeacher(Teacher teacher)
@@ -29,6 +35,9 @@ public class TeacherServiceImpl {
         return teacherDAOImpl.retrieveElementByID(id);
     }
     /*-----UPDATE-----*/
+    public void saveCourse(Course course){
+        courseDAOImpl.saveElement(course);
+    }
     public void updateTeacher(Teacher teacher)
     {
         teacherDAOImpl.updateElement(teacher);
