@@ -1,7 +1,7 @@
-package com.elina.service_impl;
+package com.elina.service.impl;
 
 import com.elina.dao.DepartmentDAO;
-import com.elina.dao_impl.DepartmentDAOImpl;
+import com.elina.dao.impl.DepartmentDAOImpl;
 import com.elina.model.Course;
 import com.elina.model.Department;
 import com.elina.service.DepartmentService;

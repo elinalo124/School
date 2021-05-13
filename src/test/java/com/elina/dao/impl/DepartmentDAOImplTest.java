@@ -1,4 +1,4 @@
-package com.elina.dao_impl;
+package com.elina.dao.impl;
 
 import com.elina.model.Course;
 import com.elina.model.Department;

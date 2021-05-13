@@ -1,7 +1,7 @@
-package com.elina.service_impl;
+package com.elina.service.impl;
 
 import com.elina.dao.StudentDAO;
-import com.elina.dao_impl.StudentDAOImpl;
+import com.elina.dao.impl.StudentDAOImpl;
 import com.elina.model.Student;
 import com.elina.util.JPASessionUtil;
 

@@ -1,4 +1,4 @@
-package com.elina.service_impl;
+package com.elina.service.impl;
 
 import com.elina.model.Student;
 import com.elina.util.Utility;

@@ -1,13 +1,10 @@
-package com.elina.service_impl;
+package com.elina.service.impl;
 
 import com.elina.dao.CourseDAO;
-import com.elina.dao.StudentDAO;
 import com.elina.dao.TeacherDAO;
-import com.elina.dao_impl.CourseDAOImpl;
-import com.elina.dao_impl.StudentDAOImpl;
-import com.elina.dao_impl.TeacherDAOImpl;
+import com.elina.dao.impl.CourseDAOImpl;
+import com.elina.dao.impl.TeacherDAOImpl;
 import com.elina.model.Course;
-import com.elina.model.Student;
 import com.elina.model.Teacher;
 import com.elina.util.JPASessionUtil;
 

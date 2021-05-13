@@ -1,8 +1,7 @@
-package com.elina.dao_impl;
+package com.elina.dao.impl;
 
 import com.elina.dao.CourseDAO;
 import com.elina.model.Course;
-import com.elina.model.Department;
 import com.elina.model.Student;
 
 import javax.persistence.EntityManager;
