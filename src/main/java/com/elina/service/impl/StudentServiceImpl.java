@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.Optional;
 
 public class StudentServiceImpl {
-    StudentDAO studentDAOImpl = new StudentDAOImpl(JPASessionUtil.getEntityManager("Elina"));
+    /*StudentDAO studentDAOImpl = new StudentDAOImpl(JPASessionUtil.getEntityManager("Elina"));
 
     /*-----CREATE-----*/
-    public void saveStudent(Student student)
+    /*public void saveStudent(Student student)
     {
         studentDAOImpl.saveElement(student);
     }
     /*-----RETRIEVE-----*/
-    public List<Student> retrieveAllStudents()
+    /*public List<Student> retrieveAllStudents()
     {
         return studentDAOImpl.retrieveAllElements();
     }
@@ -26,19 +26,21 @@ public class StudentServiceImpl {
         return studentDAOImpl.retrieveElementByID(id);
     }
     /*-----UPDATE-----*/
-    public void updateStudent(Student student)
+    /*public void updateStudent(Student student)
     {
         studentDAOImpl.updateElement(student);
     }
     /*-----DELETE-----*/
-    public void deleteStudent(Student student)
+    /*public void deleteStudent(Student student)
     {
         studentDAOImpl.deleteElement(student);
     }
     /*-----OTHER-----*/
-    public void changeMajor(Integer id, String major)
+    /*public void changeMajor(Integer id, String major)
     {
         studentDAOImpl.changeMajor(id, major);
     }
+
+     */
 
 }

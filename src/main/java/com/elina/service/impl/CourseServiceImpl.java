@@ -6,19 +6,20 @@ import com.elina.model.Course;
 import com.elina.model.Student;
 import com.elina.util.JPASessionUtil;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
 public class CourseServiceImpl {
-    CourseDAO courseDAOImpl = new CourseDAOImpl(JPASessionUtil.getEntityManager("Elina"));
+    //CourseDAO courseDAOImpl = new CourseDAOImpl(JPASessionUtil.getEntityManager("Elina"));
 
     /*-----CREATE-----*/
-    public void saveCourse(Course course)
+    /*public void saveCourse(Course course)
     {
         courseDAOImpl.saveElement(course);
     }
     /*-----RETRIEVE-----*/
-    public List<Course> retrieveAllCourses()
+    /*public List<Course> retrieveAllCourses()
     {
         return courseDAOImpl.retrieveAllElements();
     }
@@ -27,17 +28,17 @@ public class CourseServiceImpl {
         return courseDAOImpl.retrieveElementByID(id);
     }
     /*-----UPDATE-----*/
-    public void updateCourse(Course course)
+    /*public void updateCourse(Course course)
     {
         courseDAOImpl.updateElement(course);
     }
     /*-----DELETE-----*/
-    public void deleteCourse(Course department)
+    /*public void deleteCourse(Course department)
     {
         courseDAOImpl.deleteElement(department);
     }
     /*-----OTHER-----*/
-    public Optional<Course> retrieveCourseByName(String name)
+    /*public Optional<Course> retrieveCourseByName(String name)
     {
         return courseDAOImpl.retrieveCourseByName(name);
     }
@@ -45,4 +46,6 @@ public class CourseServiceImpl {
     {
         courseDAOImpl.addStudent(id,student);
     }
+
+     */
 }

@@ -30,7 +30,7 @@ public class Course {
     private String name;
     private String description;
     @ManyToOne
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "department")
     private Department department;
     @OneToOne(mappedBy = "course",cascade = CascadeType.ALL)
     private Teacher teacher;

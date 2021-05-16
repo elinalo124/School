@@ -14,6 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CourseDAOImplTest {
+    /*
     @Test
     @DisplayName("C")
     public void saveCourseTest()
@@ -94,4 +95,6 @@ class CourseDAOImplTest {
         assertEquals(1, retrievedCourses.size());
         entityManager.close();
     }
+
+     */
 }

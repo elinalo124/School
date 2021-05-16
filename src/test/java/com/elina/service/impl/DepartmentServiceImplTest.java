@@ -18,7 +18,7 @@ class DepartmentServiceImplTest {
     @DisplayName("C")
     public void saveDepartmentTest()
     {
-        DepartmentService departmentService = new DepartmentServiceImpl();
+        DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
         // Create two department and add 2 courses to their list of courses
         Department department1 = Utility.createDepartment1();
         Department department2 = Utility.createDepartment2();
@@ -27,6 +27,7 @@ class DepartmentServiceImplTest {
         List<Department> departments = departmentService.retrieveAllDepartments();
         assertEquals(department1.getName(), departments.get(0).getName());
     }
+    /*
     @Test
     @DisplayName("R")
     public void getDepartmentsTest()
@@ -74,6 +75,8 @@ class DepartmentServiceImplTest {
         List<Department> retrievedDepartments = departmentService.retrieveAllDepartments();
         assertEquals(1, retrievedDepartments.size());
     }
+
+     */
 
 
 }

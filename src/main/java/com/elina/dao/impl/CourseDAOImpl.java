@@ -2,22 +2,36 @@ package com.elina.dao.impl;
 
 import com.elina.dao.CourseDAO;
 import com.elina.model.Course;
+import com.elina.model.Department;
 import com.elina.model.Student;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class CourseDAOImpl implements CourseDAO {
+public class CourseDAOImpl {
 
     private EntityManager entityManager;
     public CourseDAOImpl(EntityManager entityManager)
     {
         this.entityManager = entityManager;
     }
+    static private CourseDAOImpl singletonInstance = null;
+    public static CourseDAOImpl createDAO(EntityManager entityManager)
+    {
+        if (singletonInstance == null) singletonInstance = new CourseDAOImpl(entityManager);
+        return singletonInstance;
+    }
+
+    public void updateElement(Course course)
+    {
+        Course courseToUpdate = entityManager.find(Course.class, course.getId());
+        entityManager.merge(courseToUpdate);
+    }
 
     /*-----------------------------CRUD---------------------------------------*/
     /*============CREATE============*/
+    /*
     public void saveElement(Course course)
     {
         entityManager.getTransaction().begin();
@@ -26,6 +40,7 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     /*============RETRIEVE============*/
+    /*
     public List<Course> retrieveAllElements()
     {
         return entityManager.createQuery("from Course").getResultList();
@@ -45,6 +60,7 @@ public class CourseDAOImpl implements CourseDAO {
         return course != null ? Optional.of(course) : Optional.empty();
     }
     /*============UPDATE============*/
+    /*
     public void updateElement(Course course)
     {
         entityManager.getTransaction().begin();
@@ -60,6 +76,7 @@ public class CourseDAOImpl implements CourseDAO {
         entityManager.getTransaction().commit();
     }
     /*============DELETE============*/
+    /*
     public void deleteElement(Course course)
     {
         System.out.println("Course passed to deleteDAO:"+course);
@@ -69,6 +86,8 @@ public class CourseDAOImpl implements CourseDAO {
         entityManager.remove(courseToDelete);
         entityManager.getTransaction().commit();
     }
+
+     */
 
 
 }

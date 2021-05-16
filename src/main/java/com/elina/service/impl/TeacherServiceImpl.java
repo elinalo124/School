@@ -14,16 +14,16 @@ import java.util.Optional;
 
 public class TeacherServiceImpl {
     EntityManager entityManager = JPASessionUtil.getEntityManager("Elina");
-    TeacherDAO teacherDAOImpl = new TeacherDAOImpl(entityManager);
-    CourseDAO courseDAOImpl = new CourseDAOImpl(entityManager);
+    //TeacherDAO teacherDAOImpl = new TeacherDAOImpl(entityManager);
+    //CourseDAO courseDAOImpl = new CourseDAOImpl(entityManager);
 
     /*-----CREATE-----*/
-    public void saveTeacher(Teacher teacher)
+    /*public void saveTeacher(Teacher teacher)
     {
         teacherDAOImpl.saveElement(teacher);
     }
     /*-----RETRIEVE-----*/
-    public List<Teacher> retrieveAllTeachers()
+    /*public List<Teacher> retrieveAllTeachers()
     {
         return teacherDAOImpl.retrieveAllElements();
     }
@@ -32,7 +32,7 @@ public class TeacherServiceImpl {
         return teacherDAOImpl.retrieveElementByID(id);
     }
     /*-----UPDATE-----*/
-    public void saveCourse(Course course){
+    /*public void saveCourse(Course course){
         courseDAOImpl.saveElement(course);
     }
     public void updateTeacher(Teacher teacher)
@@ -40,9 +40,11 @@ public class TeacherServiceImpl {
         teacherDAOImpl.updateElement(teacher);
     }
     /*-----DELETE-----*/
-    public void deleteTeacher(Teacher teacher)
+    /*public void deleteTeacher(Teacher teacher)
     {
         teacherDAOImpl.deleteElement(teacher);
     }
+
+     */
 
 }

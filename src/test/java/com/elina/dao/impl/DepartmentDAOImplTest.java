@@ -14,6 +14,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DepartmentDAOImplTest {
+
+    /*
     @Test
     @DisplayName("C")
     public void saveDepartmentTest()
@@ -89,5 +91,7 @@ class DepartmentDAOImplTest {
         assertEquals(1, retrievedDepartments.size());
         entityManager.close();
     }
+
+     */
 
 }

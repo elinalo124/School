@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CourseServiceImplTest {
 
+    /*
     @Test
     @DisplayName("C")
     public void saveCourseTest()
@@ -78,5 +79,7 @@ class CourseServiceImplTest {
         List<Course> retrievedCourses = courseService.retrieveAllCourses();
         assertEquals(1, retrievedCourses.size());
     }
+
+     */
 
 }

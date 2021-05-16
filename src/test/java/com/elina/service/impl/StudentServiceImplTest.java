@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StudentServiceImplTest {
 
+    /*
     @Test
     @DisplayName("C")
     public void saveStudentTest()
@@ -74,5 +75,7 @@ class StudentServiceImplTest {
         List<Student> retrievedStudents = studentService.retrieveAllStudents();
         assertEquals(1, retrievedStudents.size());
     }
+
+     */
 
 }

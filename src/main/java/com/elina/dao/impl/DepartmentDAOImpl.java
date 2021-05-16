@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class DepartmentDAOImpl implements DepartmentDAO{
+public class DepartmentDAOImpl{
 
     private EntityManager entityManager;
     public DepartmentDAOImpl(EntityManager entityManager)
@@ -16,21 +16,34 @@ public class DepartmentDAOImpl implements DepartmentDAO{
         this.entityManager = entityManager;
     }
 
+    static private DepartmentDAOImpl singletonInstance = null;
+    public static DepartmentDAOImpl createDAO(EntityManager entityManager)
+    {
+        if (singletonInstance == null) singletonInstance = new DepartmentDAOImpl(entityManager);
+        return singletonInstance;
+    }
+
+    public void saveElement(Department department)
+    {
+        entityManager.persist(department);
+    }
+
     /*-----------------------------CRUD---------------------------------------*/
     /*============CREATE============*/
-    public void saveElement(Department department)
+    /*public void saveElement(Department department)
     {
         entityManager.getTransaction().begin();
         entityManager.persist(department);
         entityManager.getTransaction().commit();
     }
+
     /*============RETRIEVE============*/
     public List<Department> retrieveAllElements()
     {
         return entityManager.createQuery("from Department").getResultList();
     }
 
-    public Optional<Department> retrieveElementByID(int id)
+    /*public Optional<Department> retrieveElementByID(int id)
     {
         Department department = entityManager.find(Department.class, id);
         return department != null? Optional.of(department): Optional.empty();
@@ -45,7 +58,7 @@ public class DepartmentDAOImpl implements DepartmentDAO{
         return department != null ? Optional.of(department) : Optional.empty();
     }
     /*============UPDATE============*/
-    public void updateElement(Department department)
+    /*public void updateElement(Department department)
     {
         entityManager.getTransaction().begin();
         Department departmentToUpdate = entityManager.find(Department.class, department.getId());
@@ -61,7 +74,7 @@ public class DepartmentDAOImpl implements DepartmentDAO{
     }
 
     /*============DELETE============*/
-    public void deleteElement(Department department)
+    /*public void deleteElement(Department department)
     {
         entityManager.getTransaction().begin();
         Department departmentToDelete = entityManager.find(Department.class, department.getId());
@@ -69,6 +82,9 @@ public class DepartmentDAOImpl implements DepartmentDAO{
         entityManager.remove(departmentToDelete);
         entityManager.getTransaction().commit();
     }
+
+     */
+
 
 }
 

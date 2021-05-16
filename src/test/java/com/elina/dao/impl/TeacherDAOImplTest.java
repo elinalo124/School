@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TeacherDAOImplTest {
 
+    /*
     @Test
     @DisplayName("C")
     public void saveStudentTest()
@@ -98,5 +99,7 @@ class TeacherDAOImplTest {
         assertEquals(1, retrievedTeachers.size());
         entityManager.close();
     }
+
+     */
 
 }
