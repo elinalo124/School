@@ -23,18 +23,17 @@ public class DepartmentDAOImpl{
         return singletonInstance;
     }
 
-    public void saveElement(Department department)
-    {
-        entityManager.persist(department);
-    }
 
     /*-----------------------------CRUD---------------------------------------*/
     /*============CREATE============*/
-    /*public void saveElement(Department department)
+    public void saveElement(Department department)
     {
-        entityManager.getTransaction().begin();
-        entityManager.persist(department);
-        entityManager.getTransaction().commit();
+        if (entityManager.contains(department)) {
+            entityManager.merge(department);
+        } else {
+            entityManager.persist(department);
+        }
+
     }
 
     /*============RETRIEVE============*/
@@ -43,7 +42,7 @@ public class DepartmentDAOImpl{
         return entityManager.createQuery("from Department").getResultList();
     }
 
-    /*public Optional<Department> retrieveElementByID(int id)
+    public Optional<Department> retrieveElementByID(int id)
     {
         Department department = entityManager.find(Department.class, id);
         return department != null? Optional.of(department): Optional.empty();

@@ -16,10 +16,11 @@ public class DepartmentServiceImpl{
 
     private EntityManager em = JPASessionUtil.getEntityManager("Elina");
 
+    private void begin(){if(!em.getTransaction().isActive())em.getTransaction().begin();}
     /*-----CREATE-----*/
     public void saveDepartment(Department department)
     {
-        em.getTransaction().begin();
+        begin();
         DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
         CourseDAOImpl courseDAOImpl = CourseDAOImpl.createDAO(em);
 
@@ -31,22 +32,26 @@ public class DepartmentServiceImpl{
         }
         em.getTransaction().commit();
     }
+
+    /*-----RETRIEVE-----*/
     public List<Department> retrieveAllDepartments()
     {
-        em.getTransaction().begin();
+        begin();
         DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
         return departmentDAOImpl.retrieveAllElements();
     }
 
-
-    /*-----RETRIEVE-----*/
-    /*public List<Department> retrieveAllDepartments()
-    {
-        return departmentDAOImpl.retrieveAllElements();
-    }
     public Optional<Department> retrieveDepartmentByID (int id)
     {
+        begin();
+        DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
         return departmentDAOImpl.retrieveElementByID(id);
+    }
+    public Optional<Department> retrieveDepartmentByName (String name)
+    {
+        begin();
+        DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        return departmentDAOImpl.retrieveDepartmentByName(name);
     }
     /*-----UPDATE-----*/
    /* public void updateDepartment(Department department)

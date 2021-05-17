@@ -25,14 +25,15 @@ class DepartmentServiceImplTest {
         departmentService.saveDepartment(department1);
         departmentService.saveDepartment(department2);
         List<Department> departments = departmentService.retrieveAllDepartments();
+        System.out.print(departments);
         assertEquals(department1.getName(), departments.get(0).getName());
     }
-    /*
+
     @Test
     @DisplayName("R")
     public void getDepartmentsTest()
     {
-        DepartmentService departmentService = new DepartmentServiceImpl();
+        DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
         // Create two department and add 2 courses to their list of courses
         Department department1 = Utility.createDepartment1();
         Department department2 = Utility.createDepartment2();
@@ -47,6 +48,7 @@ class DepartmentServiceImplTest {
         assertEquals(department1, departmentService.retrieveDepartmentByName("Department 1").get());
     }
 
+    /*
     @Test
     @DisplayName("U")
     public void addCourseTest()

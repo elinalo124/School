@@ -29,6 +29,9 @@ public class Department {
     @Override
     public String toString()
     {
-        return "Department(id=" + id + ", name=" + name + ", courses="+courses.toString()+")";
+        String title = "********TABLE Departments********";
+        String columns = "id        name      courses     |";
+        String values = id +"        "+ name +"    "+ courses.toString();
+        return "\n"+title + "\n" + columns + "\n" + values+"\n\n";
     }
 }
