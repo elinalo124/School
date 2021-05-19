@@ -16,12 +16,12 @@ public class CourseDAOImpl {
     {
         this.entityManager = entityManager;
     }
-    static private CourseDAOImpl singletonInstance = null;
+    /*static private CourseDAOImpl singletonInstance = null;
     public static CourseDAOImpl createDAO(EntityManager entityManager)
     {
         if (singletonInstance == null) singletonInstance = new CourseDAOImpl(entityManager);
         return singletonInstance;
-    }
+    }*/
 
     public void updateElement(Course course)
     {

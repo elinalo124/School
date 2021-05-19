@@ -14,15 +14,21 @@ import java.util.Optional;
 
 public class DepartmentServiceImpl{
 
-    private EntityManager em = JPASessionUtil.getEntityManager("Elina");
+    private EntityManager em;
+
+    public DepartmentServiceImpl(EntityManager em) {
+        this.em=em;
+    }
 
     private void begin(){if(!em.getTransaction().isActive())em.getTransaction().begin();}
     /*-----CREATE-----*/
     public void saveDepartment(Department department)
     {
         begin();
-        DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
-        CourseDAOImpl courseDAOImpl = CourseDAOImpl.createDAO(em);
+        //DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(em);
+        //CourseDAOImpl courseDAOImpl = CourseDAOImpl.createDAO(em);
+        CourseDAOImpl courseDAOImpl = new CourseDAOImpl(em);
 
         departmentDAOImpl.saveElement(department);
         for(Course course:department.getCourses())
@@ -37,42 +43,51 @@ public class DepartmentServiceImpl{
     public List<Department> retrieveAllDepartments()
     {
         begin();
-        DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        //DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(em);
         return departmentDAOImpl.retrieveAllElements();
     }
 
     public Optional<Department> retrieveDepartmentByID (int id)
     {
         begin();
-        DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        //DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(em);
         return departmentDAOImpl.retrieveElementByID(id);
     }
     public Optional<Department> retrieveDepartmentByName (String name)
     {
         begin();
-        DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        //DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(em);
         return departmentDAOImpl.retrieveDepartmentByName(name);
     }
     /*-----UPDATE-----*/
-   /* public void updateDepartment(Department department)
+    public void updateDepartment(Department department)
     {
+        begin();
+        //DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(em);
         departmentDAOImpl.updateElement(department);
+        em.getTransaction().commit();
     }
     /*-----DELETE-----*/
-   /* public void deleteDepartment(Department department)
+    public void deleteDepartment(Department department)
     {
+        begin();
+        //DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(em);
         departmentDAOImpl.deleteElement(department);
+        em.getTransaction().commit();
     }
     /*-----OTHER-----*/
-    /*public Optional<Department> retrieveDepartmentByName(String name)
-    {
-        return departmentDAOImpl.retrieveDepartmentByName(name);
-    }
     public void addCourse(Integer id, Course course)
     {
+        begin();
+        //DepartmentDAOImpl departmentDAOImpl = DepartmentDAOImpl.createDAO(em);
+        DepartmentDAOImpl departmentDAOImpl = new DepartmentDAOImpl(em);
         departmentDAOImpl.addCourse(id,course);
+        em.getTransaction().commit();
     }
-
-     */
 
 }

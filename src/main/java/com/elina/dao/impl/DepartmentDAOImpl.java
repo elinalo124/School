@@ -16,12 +16,12 @@ public class DepartmentDAOImpl{
         this.entityManager = entityManager;
     }
 
-    static private DepartmentDAOImpl singletonInstance = null;
+    /*static private DepartmentDAOImpl singletonInstance = null;
     public static DepartmentDAOImpl createDAO(EntityManager entityManager)
     {
         if (singletonInstance == null) singletonInstance = new DepartmentDAOImpl(entityManager);
         return singletonInstance;
-    }
+    }*/
 
 
     /*-----------------------------CRUD---------------------------------------*/
@@ -57,32 +57,27 @@ public class DepartmentDAOImpl{
         return department != null ? Optional.of(department) : Optional.empty();
     }
     /*============UPDATE============*/
-    /*public void updateElement(Department department)
+    public void updateElement(Department department)
     {
-        entityManager.getTransaction().begin();
         Department departmentToUpdate = entityManager.find(Department.class, department.getId());
         entityManager.merge(departmentToUpdate);
-        entityManager.getTransaction().commit();
     }
     public void addCourse(Integer id, Course course)
     {
-        entityManager.getTransaction().begin();
         Department departmentToUpdate = entityManager.find(Department.class, id);
         departmentToUpdate.getCourses().add(course);
-        entityManager.getTransaction().commit();
     }
 
     /*============DELETE============*/
-    /*public void deleteElement(Department department)
+    public void deleteElement(Department department)
     {
-        entityManager.getTransaction().begin();
         Department departmentToDelete = entityManager.find(Department.class, department.getId());
-        System.out.print(departmentToDelete);
         entityManager.remove(departmentToDelete);
-        entityManager.getTransaction().commit();
     }
 
-     */
+
+
+
 
 
 }
