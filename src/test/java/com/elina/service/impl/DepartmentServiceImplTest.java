@@ -21,22 +21,22 @@ class DepartmentServiceImplTest {
     private List<Department> retrievedDepartments;
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Elina");
     private DepartmentServiceImpl departmentService;
-    private LinkedList<EntityManager> emList = new LinkedList<>();
+    private EntityManager em;
 
     @BeforeEach
     public void init() {
         initDepartments();
 
-        emList.add(emf.createEntityManager());
-        emList.getFirst().getTransaction().begin();
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
 
-        departmentService = new DepartmentServiceImpl(emList.getFirst());
+        departmentService = new DepartmentServiceImpl(em);
         departmentService.saveDepartment(department1);
         departmentService.saveDepartment(department2);
 
         retrievedDepartments = departmentService.retrieveAllDepartments();
 
-        emList.getFirst().getTransaction().commit();
+        em.getTransaction().commit();
 
     }
 
@@ -78,8 +78,8 @@ class DepartmentServiceImplTest {
 
     @AfterEach
     public void dropDown() {
-        emList.getFirst().clear();
-        emList.getFirst().close();
+        em.clear();
+        em.close();
     }
 
     private void initDepartments()
