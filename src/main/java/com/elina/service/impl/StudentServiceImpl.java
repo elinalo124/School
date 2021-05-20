@@ -1,23 +1,30 @@
 package com.elina.service.impl;
 
-import com.elina.dao.StudentDAO;
 import com.elina.dao.impl.StudentDAOImpl;
 import com.elina.model.Student;
-import com.elina.util.JPASessionUtil;
+import com.elina.service.StudentService;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class StudentServiceImpl {
-    /*StudentDAO studentDAOImpl = new StudentDAOImpl(JPASessionUtil.getEntityManager("Elina"));
+public class StudentServiceImpl implements StudentService{
+    private EntityManager em;
+    private StudentDAOImpl studentDAOImpl;
+    //private CourseDAOImpl courseDAOImpl;
 
+    public StudentServiceImpl(EntityManager em) {
+        this.em=em;
+        studentDAOImpl = new StudentDAOImpl(em);
+        //courseDAOImpl = new CourseDAOImpl(em);
+    }
     /*-----CREATE-----*/
-    /*public void saveStudent(Student student)
+    public void saveStudent(Student student)
     {
         studentDAOImpl.saveElement(student);
     }
     /*-----RETRIEVE-----*/
-    /*public List<Student> retrieveAllStudents()
+    public List<Student> retrieveAllStudents()
     {
         return studentDAOImpl.retrieveAllElements();
     }
@@ -26,21 +33,20 @@ public class StudentServiceImpl {
         return studentDAOImpl.retrieveElementByID(id);
     }
     /*-----UPDATE-----*/
-    /*public void updateStudent(Student student)
+    public void updateStudent(Student student)
     {
         studentDAOImpl.updateElement(student);
     }
     /*-----DELETE-----*/
-    /*public void deleteStudent(Student student)
+    public void deleteStudent(Student student)
     {
         studentDAOImpl.deleteElement(student);
     }
     /*-----OTHER-----*/
-    /*public void changeMajor(Integer id, String major)
+    public void changeMajor(Integer id, String major)
     {
         studentDAOImpl.changeMajor(id, major);
     }
 
-     */
 
 }

@@ -1,7 +1,6 @@
 package com.elina.dao.impl;
 
 import com.elina.dao.TeacherDAO;
-import com.elina.model.Course;
 import com.elina.model.Teacher;
 
 import javax.persistence.EntityManager;
@@ -15,23 +14,34 @@ public class TeacherDAOImpl implements TeacherDAO {
         this.entityManager = entityManager;
     }
 
+    private void begin()
+    {
+        if(!entityManager.getTransaction().isActive())
+            entityManager.getTransaction().begin();
+    }
     /*-----------------------------CRUD---------------------------------------*/
     /*============CREATE============*/
     public void saveElement(Teacher teacher)
     {
-        entityManager.getTransaction().begin();
-        entityManager.persist(teacher.getCourse());
-        entityManager.persist(teacher);
+        begin();
+        if (entityManager.contains(teacher)) {
+            entityManager.merge(teacher);
+        } else {
+            entityManager.persist(teacher);
+        }
         entityManager.getTransaction().commit();
+
     }
     /*============RETRIEVE============*/
     public List<Teacher> retrieveAllElements()
     {
+        begin();
         return entityManager.createQuery("from Teacher").getResultList();
     }
 
     public Optional<Teacher> retrieveElementByID(int id)
     {
+        begin();
         Teacher teacher = entityManager.find(Teacher.class, id);
         return teacher != null ? Optional.of(teacher) : Optional.empty();
     }
@@ -40,7 +50,7 @@ public class TeacherDAOImpl implements TeacherDAO {
 
     public void updateElement(Teacher teacher)
     {
-        entityManager.getTransaction().begin();
+        begin();
         Teacher teacherToUpdate = entityManager.find(Teacher.class, teacher.getId());
         entityManager.merge(teacherToUpdate);
         entityManager.getTransaction().commit();
@@ -50,16 +60,10 @@ public class TeacherDAOImpl implements TeacherDAO {
     /*============DELETE============*/
     public void deleteElement(Teacher teacher)
     {
-        entityManager.getTransaction().begin();
+        begin();
         Teacher teacherToDelete = entityManager.find(Teacher.class, teacher.getId());
-        System.out.print(teacherToDelete);
         entityManager.remove(teacherToDelete);
         entityManager.getTransaction().commit();
     }
 
-    public void saveCourse(Course course){
-        entityManager.getTransaction().begin();
-        entityManager.persist(course);
-        entityManager.getTransaction().commit();
-    }
 }

@@ -32,7 +32,7 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "department")
     private Department department;
-    @OneToOne(mappedBy = "course",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "course",cascade = CascadeType.ALL, orphanRemoval = true)
     private Teacher teacher;
     @ManyToMany(mappedBy = "courses",cascade = CascadeType.ALL)
     private List<Student> students;

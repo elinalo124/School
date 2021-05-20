@@ -1,25 +1,40 @@
 package com.elina.service.impl;
 
-import com.elina.dao.CourseDAO;
 import com.elina.dao.impl.CourseDAOImpl;
+import com.elina.dao.impl.StudentDAOImpl;
 import com.elina.model.Course;
 import com.elina.model.Student;
-import com.elina.util.JPASessionUtil;
+import com.elina.service.CourseService;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class CourseServiceImpl {
-    //CourseDAO courseDAOImpl = new CourseDAOImpl(JPASessionUtil.getEntityManager("Elina"));
+public class CourseServiceImpl implements CourseService {
+
+    private EntityManager em;
+    private CourseDAOImpl courseDAOImpl;
+    private StudentDAOImpl studentDAOImpl;
+
+    public CourseServiceImpl(EntityManager em) {
+        this.em=em;
+        courseDAOImpl = new CourseDAOImpl(em);
+        studentDAOImpl = new StudentDAOImpl(em);
+    }
 
     /*-----CREATE-----*/
-    /*public void saveCourse(Course course)
+    public void saveCourse(Course course)
     {
         courseDAOImpl.saveElement(course);
+        for(Student student:course.getStudents())
+        {
+            student.getCourses().add(course);
+            studentDAOImpl.updateElement(student);
+        }
     }
+
     /*-----RETRIEVE-----*/
-    /*public List<Course> retrieveAllCourses()
+    public List<Course> retrieveAllCourses()
     {
         return courseDAOImpl.retrieveAllElements();
     }
@@ -28,17 +43,17 @@ public class CourseServiceImpl {
         return courseDAOImpl.retrieveElementByID(id);
     }
     /*-----UPDATE-----*/
-    /*public void updateCourse(Course course)
+    public void updateCourse(Course course)
     {
         courseDAOImpl.updateElement(course);
     }
     /*-----DELETE-----*/
-    /*public void deleteCourse(Course department)
+    public void deleteCourse(Course department)
     {
         courseDAOImpl.deleteElement(department);
     }
     /*-----OTHER-----*/
-    /*public Optional<Course> retrieveCourseByName(String name)
+    public Optional<Course> retrieveCourseByName(String name)
     {
         return courseDAOImpl.retrieveCourseByName(name);
     }
@@ -47,5 +62,4 @@ public class CourseServiceImpl {
         courseDAOImpl.addStudent(id,student);
     }
 
-     */
 }

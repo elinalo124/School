@@ -17,7 +17,7 @@ public interface CourseService {
     /*-----UPDATE-----*/
     void updateCourse(Course course);
     /*-----DELETE-----*/
-    void deleteDepartment(Department department);
+    void deleteCourse(Course course);
     /*-----OTHER-----*/
     Optional<Course> retrieveCourseByName(String name);
     void addStudent(int id, Student student);

@@ -9,85 +9,74 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class CourseDAOImpl {
+public class CourseDAOImpl implements CourseDAO{
 
     private EntityManager entityManager;
     public CourseDAOImpl(EntityManager entityManager)
     {
         this.entityManager = entityManager;
     }
-    /*static private CourseDAOImpl singletonInstance = null;
-    public static CourseDAOImpl createDAO(EntityManager entityManager)
-    {
-        if (singletonInstance == null) singletonInstance = new CourseDAOImpl(entityManager);
-        return singletonInstance;
-    }*/
 
-    public void updateElement(Course course)
+    private void begin()
     {
-        Course courseToUpdate = entityManager.find(Course.class, course.getId());
-        entityManager.merge(courseToUpdate);
+        if(!entityManager.getTransaction().isActive())
+            entityManager.getTransaction().begin();
     }
 
     /*-----------------------------CRUD---------------------------------------*/
     /*============CREATE============*/
-    /*
     public void saveElement(Course course)
     {
-        entityManager.getTransaction().begin();
-        entityManager.persist(course);
+        begin();
+        if (entityManager.contains(course)) {
+            entityManager.merge(course);
+        } else {
+            entityManager.persist(course);
+        }
         entityManager.getTransaction().commit();
     }
-
     /*============RETRIEVE============*/
-    /*
     public List<Course> retrieveAllElements()
     {
+        begin();
         return entityManager.createQuery("from Course").getResultList();
     }
-
     public Optional<Course> retrieveElementByID(int id)
     {
+        begin();
         Course course = entityManager.find(Course.class, id);
-        return course != null ? Optional.of(course) : Optional.empty();
+        return course != null? Optional.of(course): Optional.empty();
     }
-
     public Optional<Course> retrieveCourseByName(String name)
     {
-        Course course = entityManager.createQuery("SELECT c FROM Course c WHERE c.name = :name", Course.class)
+        begin();
+        Course course = entityManager.createNamedQuery("Course.findByName", Course.class)
                 .setParameter("name", name)
                 .getSingleResult();
         return course != null ? Optional.of(course) : Optional.empty();
     }
     /*============UPDATE============*/
-    /*
     public void updateElement(Course course)
     {
-        entityManager.getTransaction().begin();
+        begin();
         Course courseToUpdate = entityManager.find(Course.class, course.getId());
         entityManager.merge(courseToUpdate);
         entityManager.getTransaction().commit();
     }
     public void addStudent(int id, Student student)
     {
-        entityManager.getTransaction().begin();
+        begin();
         Course courseToUpdate = entityManager.find(Course.class, id);
         courseToUpdate.getStudents().add(student);
         entityManager.getTransaction().commit();
     }
     /*============DELETE============*/
-    /*
     public void deleteElement(Course course)
     {
-        System.out.println("Course passed to deleteDAO:"+course);
-        entityManager.getTransaction().begin();
+        begin();
         Course courseToDelete = entityManager.find(Course.class, course.getId());
-        System.out.println("Course to delete:"+courseToDelete);
         entityManager.remove(courseToDelete);
         entityManager.getTransaction().commit();
     }
-
-     */
-
 
 }

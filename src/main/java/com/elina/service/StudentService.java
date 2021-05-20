@@ -12,7 +12,7 @@ public interface StudentService {
     void saveStudent(Student student);
     /*-----RETRIEVE-----*/
     List<Student> retrieveAllStudents();
-    Optional<Department> retrieveStudentByID (int id);
+    Optional<Student> retrieveStudentByID (int id);
     /*-----UPDATE-----*/
     void updateStudent(Student student);
     /*-----DELETE-----*/
