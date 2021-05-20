@@ -83,8 +83,8 @@ class StudentServiceImplTest {
 
     private void initStudents()
     {
-        student1 = Utility.createStudent1();
-        student2 = Utility.createStudent2();
+        student1 = Utility.createStudent(1);
+        student2 = Utility.createStudent(2);
         savedStudents.add(student1);
         savedStudents.add(student2);
     }

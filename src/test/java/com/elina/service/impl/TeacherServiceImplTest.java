@@ -87,8 +87,8 @@ class TeacherServiceImplTest {
 
     private void initTeachers()
     {
-        teacher1 = Utility.createTeacher1();
-        teacher2 = Utility.createTeacher2();
+        teacher1 = Utility.createTeacher(1,1);
+        teacher2 = Utility.createTeacher(2,2);
         savedTeachers.add(teacher1);
         savedTeachers.add(teacher2);
     }

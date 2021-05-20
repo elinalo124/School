@@ -85,8 +85,8 @@ class CourseServiceImplTest {
 
     private void initCourses()
     {
-        course1 = Utility.createCourse1();
-        course2 = Utility.createCourse2();
+        course1 = Utility.createCourse(1);
+        course2 = Utility.createCourse(2);
         savedCourses.add(course1);
         savedCourses.add(course2);
     }

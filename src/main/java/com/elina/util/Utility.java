@@ -9,53 +9,43 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Utility {
-    public static Department createDepartment1()
-    {
-        List<Course> courses1 = new LinkedList<>();
-        courses1.add(new Course(1,"Course 1", "Maths"));
-        courses1.add(new Course(2,"Course 2", "Physics"));
-        Department department1 = new Department(1,"Department 1",courses1);
-        return department1;
-    }
-    public static Department createDepartment2()
-    {
-        List<Course> courses2 = new LinkedList<>();
-        courses2.add(new Course(3,"Course 3", "Electronics"));
-        Department department2 = new Department(2,"Department 2",courses2);
-        return department2;
+
+
+     static private final String[][] COURSE_DATA = {
+            {"Course 1", "Maths"},
+            {"Course 2", "Physics"},
+             {"Course 3", "Electronics"}
+     };
+    static private final String[][] DEPARTMENT_DATA = {
+            {"Department 1"},
+            {"Department 2"}};
+    static private final String[][] STUDENT_DATA = {
+            {"Elina", "Lo", "Electronic engineering"},
+            {"Elisa", "Lo", "Geophysics"}};
+    static private final String[][] TEACHER_DATA = {
+            {"Mathematician","Eleonora","Lo"},
+            {"Physician","Pepe","Pepito"}};
+
+    public static Department createDepartment(Integer i, List<Integer> courseNums){
+        List<Course> courses = new LinkedList<>();
+        for (Integer courseNum: courseNums){
+            courses.add(createCourse(courseNum));
+        }
+        return new Department(i,DEPARTMENT_DATA[i-1][0],courses);
     }
 
-    public static Course createCourse1()
-    {
-        return new Course(1,"Course 1", "Maths");
+    public static Course createCourse(Integer i) {
+        return new Course(i,COURSE_DATA[i-1][0],COURSE_DATA[i-1][1]);
     }
 
-    public static Course createCourse2()
-    {
-        return new Course(2,"Course 2", "Physics");
+    public static Student createStudent(Integer i){
+        return new Student(i,STUDENT_DATA[i-1][0],STUDENT_DATA[i-1][1],i,STUDENT_DATA[i-1][2]);
+    }
+    public static Teacher createTeacher(Integer i, Integer courseNum){
+        Teacher teacher = new Teacher(i, TEACHER_DATA[i-1][0],createCourse(courseNum));
+        teacher.setFirstName(TEACHER_DATA[i-1][1]);
+        teacher.setLastName(TEACHER_DATA[i-1][2]);
+        return teacher;
     }
 
-    public static Student createStudent1()
-    {
-        return new Student(1, "Elina", "Lo", 1, "Electronic engineering");
-    }
-    public static Student createStudent2()
-    {
-        return new Student(2, "Elisa", "Lo", 2, "Geophysics");
-    }
-
-    public static Teacher createTeacher1()
-    {
-        Teacher teacher1 = new Teacher(1,"Mathematician", createCourse1());
-        teacher1.setFirstName("Eleonora");
-        teacher1.setLastName("Lo");
-        return teacher1;
-    }
-    public static Teacher createTeacher2()
-    {
-        Teacher teacher1 = new Teacher(2,"Physician", createCourse2());
-        teacher1.setFirstName("Pizza");
-        teacher1.setLastName("Tacos");
-        return teacher1;
-    }
 }

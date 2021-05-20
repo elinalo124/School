@@ -8,6 +8,7 @@ import org.junit.jupiter.api.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -84,8 +85,8 @@ class DepartmentServiceImplTest {
 
     private void initDepartments()
     {
-        department1 = Utility.createDepartment1();
-        department2 = Utility.createDepartment2();
+        department1 = Utility.createDepartment(1,new LinkedList<>(Arrays.asList(1,2)));
+        department2 = Utility.createDepartment(2,new LinkedList<>(Arrays.asList(3)));
         savedDepartments.add(department1);
         savedDepartments.add(department2);
     }
